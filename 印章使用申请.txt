@@ -1,0 +1,50 @@
+
+	var formId = nui.getbyName("form/saId").value;
+	var saDeptCode = nui.getbyName("form/saDeptCode").value;
+	var saDeptName = nui.getbyName("form/saDeptName").value;
+	var saApplyCode = nui.getbyName("form/saApplyCode").value;
+	var saApplyName = nui.getbyName("form/saApplyName").value;
+	var saReason = nui.getbyName("form/saReason").value;
+	var saDate = nui.getbyName("form/saDate").value;
+	var saNum = nui.getbyName("form/saNum").value;
+	var saUseDate = nui.getbyName("form/saUseDate").value;
+	var saSealType = nui.getbyName("form/saSealType").value;
+	var saSealName = nui.getbyName("form/saSealName").value;
+	var saRemark = nui.getbyName("form/saRemark").value;
+	var saType="gsz";//gsz  -公司章申请,zjlz  -总经理章申请,dszz  -懂事长印章申请
+
+	var json = {
+		formId:formId,
+		saDeptCode:saDeptCode,
+		saDeptName:saDeptName,
+		saApplyCode:saApplyCode,
+		saApplyName:saApplyName,
+		saReason:saReason,
+		saDate:saDate,
+		saNum:saNum,
+		saUseDate:saUseDate,
+		saSealType:saSealType,
+		saSealName:saSealName,
+		saRemark:saRemark,
+		saType:saType
+	};   
+	nui.ajax({
+	url: "com.elecoa.webservice.jiDianDoc.jiDianDocWebservice.SetJiDianDocDataForYZSQ.biz.ext",
+	type: "post",
+	data: json ,
+	contentType: "text/json",
+	success: function (text) {
+		if(text.setascdata == 0){
+			nui.alert("发送成功", "提示", function (action) {
+				if (action == "ok") {
+				 
+					window.location.reload();
+				} else {
+					window.location.reload();
+				}
+			})		
+		}else{
+			nui.alert("发送失败");
+		}
+	}
+});
